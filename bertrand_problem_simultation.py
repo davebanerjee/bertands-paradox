@@ -73,17 +73,16 @@ def generate_random_points_within_circle(num_chords=2):
         x_midpoint = r * np.cos(theta)
         y_midpoint = r * np.sin(theta)
 
-        chord_angle = random.rand() * 2 * np.pi
+        slope = -x_midpoint / y_midpoint
+
         # solving quadratic formula
-        a = 1
-        b = 2 * (x_midpoint * np.sin(chord_angle) + y_midpoint * np.cos(chord_angle))
-        c = x_midpoint ** 2 + y_midpoint ** 2 - 1
-        n1 = (-1 * b + np.sqrt(b ** 2 - 4 * a * c)) / (2 * a)
-        n2 = (-1 * b - np.sqrt(b ** 2 - 4 * a * c)) / (2 * a)
-        x1 = x_midpoint + n1 * np.sin(chord_angle)
-        y1 = y_midpoint + n1 * np.cos(chord_angle)
-        x2 = x_midpoint + n2 * np.sin(chord_angle)
-        y2 = y_midpoint + n2 * np.cos(chord_angle)
+        a = x_midpoint**2 + y_midpoint**2
+        c = x_midpoint**2 + y_midpoint**2 - 1
+        n = np.sqrt(-4*a*c) / (2*a)
+        x1 = x_midpoint + n*y_midpoint
+        y1 = y_midpoint - n*x_midpoint
+        x2 = x_midpoint - n*y_midpoint
+        y2 = y_midpoint + n*x_midpoint
 
         X.append(x1)
         X.append(x2)
