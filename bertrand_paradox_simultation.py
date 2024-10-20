@@ -27,16 +27,13 @@ def plot_chords(X, Y, approach_num):
 
 def generate_random_points_on_circumference(num_points=2):
     if num_points % 2 != 0:
-        print('please input even number of points.')
+        print('Please input an even number of points.')
         return None
     X, Y = [], []
     for _ in range(num_points):
-        x = random.uniform(-1, 1)
-        sign = random.randint(2)
-        if sign == 0:
-            y = np.sqrt(1 - x ** 2)
-        else:
-            y = -1 * np.sqrt(1 - x ** 2)
+        theta = random.uniform(0, 2 * np.pi)  # Uniformly choose an angle between 0 and 2π
+        x = np.cos(theta)
+        y = np.sin(theta)
         X.append(x)
         Y.append(y)
     return X, Y
@@ -92,7 +89,7 @@ def generate_random_points_within_circle(num_chords=2):
     return X, Y
 
 
-num_chords = 500
+num_chords = 1500
 
 # Approach 1 (random endpoints method)
 num_endpoints = num_chords * 2
